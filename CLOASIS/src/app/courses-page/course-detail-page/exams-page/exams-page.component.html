@@ -1,2 +1,23 @@
-<div style="height: 529px"><p>exams-page works!</p></div>
+<div style="height: 529px">
+    <div *ngFor="let exam of exams; let id = index" class="card">
+    <h5 class="card-header">{{exam.title}}</h5>
+    <div class="card-body">
+        <table class="table text-center" style="color:black;">
+            <tr>
+                <th class="text-center">Room:</th>
+                <th class="text-center">Date:</th>
+                <th class="text-center">Start Time:</th>
+                <th class="text-center">Duration:</th>
+            </tr>
+            <tr>
+                <td class="text-center"><span>{{exam.room}}</span></td>
+                <td class="text-center"><span>{{exam.date}}</span></td>
+                <td class="text-center"><span>{{exam.start_time}}</span></td>
+                <td class="text-center"><span>{{exam.duration}}</span></td>
+              </tr>
+        </table>
+       <a routerLink="Exam-details"> <button (click)="OnClick(exam.title)" class="btn btn-info" size="md" rounded="true" type="button" mdbBtn >View Details</button></a>
+    </div>
+  </div>
+</div>
 

@@ -7,6 +7,7 @@ import { CGD } from '../models/courseGradeDistribution.model';
 import { Subject } from 'rxjs';
 import { CourseService } from './course.service';
 import { HttpClient } from '@angular/common/http';
+import { StudentGrade } from '../models/student-grade.model';
 
 @Injectable({
   providedIn: 'root'
@@ -15,6 +16,7 @@ export class GradesService {
 
   selectedStudentGradesEmmitter = new Subject<number[]>();
   cgdEmitter = new Subject<CGD[]>();
+  ExamType: String;
 
   grades: Grades[] = [
     {id: 1,studentId: "201904057",crn: "202020",assignment1:80,assignment2:90,midterm:70,final:85},
@@ -56,6 +58,36 @@ export class GradesService {
         this.selectedStudentGradesEmmitter.next([0,0,0,0]);
       }
     });
+  }
+
+  student_grades: StudentGrade[]=[
+    {grade_id:"1",student_id:"202003295",grade:100,description:"Final Exam"},
+    {grade_id:"1",student_id:"201807968",grade:100,description:"Final Exam"},
+    {grade_id:"1",student_id:"201902208",grade:100,description:"Final Exam"},
+    {grade_id:"1",student_id:"201805656",grade:100,description:"Final Exam"},
+    {grade_id:"1",student_id:"201602291",grade:100,description:"Final Exam"},
+    {grade_id:"1",student_id:"201902619",grade:100,description:"Final Exam"},
+    {grade_id:"1",student_id:"202003884",grade:100,description:"Final Exam"},
+    {grade_id:"1",student_id:"201607194",grade:100,description:"Final Exam"},
+    {grade_id:"1",student_id:"202003295",grade:50,description:"Midterm Exam"},
+    {grade_id:"1",student_id:"201807968",grade:50,description:"Midterm Exam"},
+    {grade_id:"1",student_id:"201902208",grade:50,description:"Midterm Exam"},
+    {grade_id:"1",student_id:"201805656",grade:50,description:"Midterm Exam"},
+    {grade_id:"1",student_id:"201602291",grade:50,description:"Midterm Exam"},
+    {grade_id:"1",student_id:"201902619",grade:50,description:"Midterm Exam"},
+    {grade_id:"1",student_id:"202003884",grade:50,description:"Midterm Exam"},
+    {grade_id:"1",student_id:"201607194",grade:50,description:"Midterm Exam"}
+  ];
+
+  get_student_grades(){
+    var grades: StudentGrade[]=[];
+    this.student_grades.forEach((grade,i:number)=>{
+      if (grade.description===this.ExamType){
+        grades.push(grade);
+      }
+    })
+
+    return grades
   }
 
   selectChartGrades(id:string,crn:string,g: number[] = []){

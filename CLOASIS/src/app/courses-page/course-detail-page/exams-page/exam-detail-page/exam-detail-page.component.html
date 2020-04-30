@@ -1,0 +1,59 @@
+
+    <div class="card w-100" style="background-color: #1C2228" > 
+        <h3 class="card-header text-center font-weight-bold text-uppercase py-4">Exam Grades</h3>
+        <div class="card-body">
+          <div id="table" class="table-editable" >
+            <span class="table-add float-right mb-3 mr-2">
+    
+            </span>
+            <table class="table text-center">
+                <!-- DO NOT REMOVE DO NOT REMOVE DO NOT REMOVEtable-bordered table-responsive-md table-striped text-center DO NOT REMOVE DO NOT REMOVE DO NOT REMOVE 
+                -->
+              <tr>
+                <th class="text-center">Student ID</th>
+                <th class="text-center">Grade</th>
+                <th class="text-center">Click To Edit</th>
+              </tr>
+              <tr id="row" *ngFor="let grade of Grades; let id = index" class="hover-highlight">
+                <td >
+                  <span >{{grade.student_id}}</span>
+          
+                </td>
+                <td >
+                    <span *ngIf="grade.student_id!==editgrade_id" >{{grade.grade}}</span>
+                    <input #grade *ngIf="grade.student_id===editgrade_id" class="form-control" value={{grade.grade}}>
+                </td>
+                
+                  <!-- 
+                <td>
+                  <span class="table-up">
+                    <a class="indigo-text">
+                      <mdb-icon fas icon="long-arrow-alt-up"></mdb-icon>
+                    </a>
+                  </span>
+                  <span class="table-down">
+                    <a class="indigo-text">
+                      <mdb-icon fas icon="long-arrow-alt-down"></mdb-icon>
+                    </a>
+                  </span>
+                </td>
+                -->
+               
+                <td>
+                   <!-- 
+                    <button *ngIf="editstudent_ID===student.studentid"  (click)="disableEdit()"  size="sm" rounded="true" class="btn btn-danger" type="button" mdbBtn  ng-click="cancel()">Cancel</button>
+                    <button *ngIf="editstudent_ID===student.studentid" id="saveBtn"  class="btn btn-info" size="sm" rounded="true" (click)="onSave(student.studentid)"type="button" mdbBtn >Save</button>
+                      -->
+                      <button *ngIf="editgrade_id===grade.student_id"  (click)="disableEdit()"  size="sm" rounded="true" class="btn btn-danger" type="button" mdbBtn  ng-click="cancel()">Cancel</button>
+                      <button *ngIf="editgrade_id===grade.student_id" id="saveBtn"  class="btn btn-info" size="sm" rounded="true" (click)="onSave(grade.student_id)"type="button" mdbBtn >Save</button>
+                      <button type="button" mdbBtn class="btn btn-success"  rounded="true" size="sm" *ngIf="editgrade_id!==grade.student_id" (click)="enableEditMethod(grade.student_id)">Edit</button>
+                
+                </td>
+                
+              </tr>
+    
+            </table>
+          </div>
+        </div>
+      </div>
+

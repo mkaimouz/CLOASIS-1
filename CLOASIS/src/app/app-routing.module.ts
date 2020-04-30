@@ -16,6 +16,7 @@ import { AssignmentsPageComponent } from './courses-page/course-detail-page/assi
 import { EditStudentTableComponent } from './students-page/student-table/edit-student-table/edit-student-table.component';
 import { StudentTableComponent } from './students-page/student-table/student-table.component';
 import { AddStudentComponent } from './students-page/add-student/add-student.component';
+import { ExamDetailPageComponent } from './courses-page/course-detail-page/exams-page/exam-detail-page/exam-detail-page.component';
 
 
 const routes: Routes = [
@@ -28,7 +29,8 @@ const routes: Routes = [
     {path:'Statistics', component: CourseStatisticsPageComponent},
     {path:'CLO', component: CourseCLOPageComponent},
     {path:'TeamManager', component:TeamManagerPageComponent},
-    {path:'Exams', component: ExamsPageComponent},
+    {path:'Exams', component: ExamsPageComponent },
+    {path:'Exams/Exam-details', component: ExamDetailPageComponent},
     {path:'Assignments', component: AssignmentsPageComponent}]},
   {path:'STUDENTSPAGE', component: StudentsPageComponent, children: [
     {path:'', component: StudentTableComponent},
