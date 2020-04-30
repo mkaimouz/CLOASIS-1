@@ -6,6 +6,7 @@ import { Grades } from '../models/grades.model';
 import { CGD } from '../models/courseGradeDistribution.model';
 import { Subject } from 'rxjs';
 import { CourseService } from './course.service';
+import { HttpClient } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root'
@@ -42,6 +43,20 @@ export class GradesService {
     {crn:"202022",assignment1:15,assignment2:25,midterm:30,final:30,overall:100},
     {crn:"202023",assignment1:10,assignment2:25,midterm:25,final:40,overall:100}
   ];
+
+  getStudentGradesInClass(id:string,crn:string,b:number = 0){
+    this.http.get('https://cloasisapi.azurewebsites.net/Grade/GetGradesOfStudentInClass/'+id+'/'+crn).subscribe( grd => {   
+      for(let key in grd){
+        b++;
+      }
+      if(b>0){
+        this.selectedStudentGradesEmmitter.next([grd[0]["GRADE"],grd[1]["GRADE"],grd[2]["GRADE"],grd[3]["GRADE"]]);
+      }
+      else{
+        this.selectedStudentGradesEmmitter.next([0,0,0,0]);
+      }
+    });
+  }
 
   selectChartGrades(id:string,crn:string,g: number[] = []){
     this.grades.forEach( grade => {
@@ -99,7 +114,7 @@ export class GradesService {
     return Math.sqrt(x/this.courseService.getNoOfStudents(crn));
   }
 
-  getTopStudent(crn:string,top:Student = {id:-1,name:"",email:"",studentid:"",imagePath:""},topAvg:number = 0,cgd:CGD = this.getCGD(crn),a:number = 0){
+  getTopStudent(crn:string,top:Student = {studentid: "",name: "",email:"",teaM_ID: "",phone:"",dob:"",gender:""},topAvg:number = 0,cgd:CGD = this.getCGD(crn),a:number = 0){
     this.courseService.registrations.forEach(reg => {
       if(reg.crn === crn){
         a=this.getAverage(this.getGrades(crn,reg.studentid),cgd)
@@ -122,5 +137,5 @@ export class GradesService {
     return [cgds,cgdn];
   }
 
-  constructor(private courseService:CourseService) { }
+  constructor(private courseService:CourseService,private http: HttpClient) { }
 }

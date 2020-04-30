@@ -1,0 +1,84 @@
+<div class="card w-100" style="background-color: #1C2228" > 
+    <h3 class="card-header text-center font-weight-bold text-uppercase py-4">Students</h3>
+    <div class="card-body">
+      <div id="table" class="table-editable" >
+        <span class="table-add float-right mb-3 mr-2">
+          <button type="button" mdbBtn class="btn btn-success"  rounded="true" size="md" routerLink="AddStudent"  >Add Student</button>
+        </span>
+        <table class="table text-center">
+            <!-- DO NOT REMOVE DO NOT REMOVE DO NOT REMOVEtable-bordered table-responsive-md table-striped text-center DO NOT REMOVE DO NOT REMOVE DO NOT REMOVE 
+            -->
+          <thead>
+            <th class="text-center">ID</th>
+            <th class="text-center">Name</th>
+            <th class="text-center">Email</th>
+            <th class="text-center">Phone</th>
+            <th class="text-center">Gender</th>
+            <th class="text-center">Team ID</th>
+            <th class="text-center">Date Of Birth</th>
+            <th class="text-center">Click To Remove</th>
+            <th class="text-center">Click To Edit</th>
+          </thead>
+          <tbody>
+          <tr id="row" *ngFor="let student of students; let id = index" class="hover-highlight">
+            <td >
+              <span >{{student.studentid}}</span>
+      
+            </td>
+            <td >
+                <span >{{student.name}}</span>
+            </td>
+            <td >
+                <span >{{student.email}}</span>
+            </td>
+            <td>
+                <span >{{student.phone}}</span>
+          
+            </td>
+            <td>
+                <span >{{student.gender}}</span>
+              
+            </td>
+            <td>
+                <span *ngIf="student.teaM_ID!==null">{{student.teaM_ID}}</span>
+                <span *ngIf="student.teaM_ID===null">None</span>
+              </td>
+              <td>
+                <span >{{student.dob}}</span>
+              </td>
+              <!-- 
+            <td>
+              <span class="table-up">
+                <a class="indigo-text">
+                  <mdb-icon fas icon="long-arrow-alt-up"></mdb-icon>
+                </a>
+              </span>
+              <span class="table-down">
+                <a class="indigo-text">
+                  <mdb-icon fas icon="long-arrow-alt-down"></mdb-icon>
+                </a>
+              </span>
+            </td>
+            -->
+            <td>
+              <span class="table-remove">
+                <button type="button" mdbBtn color="danger" rounded="true" size="sm" class="my-0" (click)="remove(student.studentid)">Remove</button>
+              </span>
+            </td>
+            <td>
+               <!-- 
+                <button *ngIf="editstudent_ID===student.studentid"  (click)="disableEdit()"  size="sm" rounded="true" class="btn btn-danger" type="button" mdbBtn  ng-click="cancel()">Cancel</button>
+                <button *ngIf="editstudent_ID===student.studentid" id="saveBtn"  class="btn btn-info" size="sm" rounded="true" (click)="onSave(student.studentid)"type="button" mdbBtn >Save</button>
+                  -->
+                <a routerLink="EditStudent"><button type="button" mdbBtn class="btn btn-success"  rounded="true" size="sm" *ngIf="editstudent_ID!==student.studentid" (click)="enableEditMethod(student.studentid)">Edit</button></a>
+            
+            </td>
+            
+          </tr>
+        </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+

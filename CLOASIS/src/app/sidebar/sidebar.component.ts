@@ -1,6 +1,7 @@
 import { Component, OnInit, OnChanges } from '@angular/core';
 import { CourseService } from '../services/course.service';
 import { RoutingExtrasService } from '../services/routing-extras.service';
+import { Course } from '../models/course.model';
 
 @Component({
   selector: 'app-sidebar',
@@ -9,18 +10,27 @@ import { RoutingExtrasService } from '../services/routing-extras.service';
 })
 export class SidebarComponent implements OnInit {
 
-  courseCodes: string[];
-  currentCourseCode: string = "";
+  courses: any;
+  coursecodes = [];
+  currentCourse = null;
 
-  selectCourseCode(coursec: string){
-    this.currentCourseCode = coursec;
+  selectCourse(course: string){
+    this.currentCourse = course;
+    this.courseService.setCourse(course);
     this.routingExtras.setCoursePage("Students");
   }
 
   constructor(private courseService: CourseService,private routingExtras:RoutingExtrasService) { }
 
   ngOnInit(){
-    this.courseCodes = this.courseService.getALLCourseCodes();
+    this.courseService.getALLCourses().subscribe(
+      courses => {
+        this.courses = courses;
+        this.courses.forEach( course => {
+          this.coursecodes.push(course["Course's Code"]);
+        });
+      }
+    );
   }
 
 }

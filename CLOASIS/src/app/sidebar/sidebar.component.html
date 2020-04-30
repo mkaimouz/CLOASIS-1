@@ -33,11 +33,11 @@
               </p>
             </a>
             <ul class="nav nav-treeview">
-              <li class="nav-item" *ngFor="let course of courseCodes">
-                <a routerLink="COURSEDETAILPAGE/{{course}}" class="nav-link" (click)="selectCourseCode(course)" 
-                [ngClass]="{active: currentCourseCode === course}" >
+              <li class="nav-item" *ngFor="let course of coursecodes">
+                <a routerLink="COURSEDETAILPAGE/{{course}}" class="nav-link" (click)="selectCourse(course)" 
+                [ngClass]="{active: currentCourse === course}" >
                   <i class="far fa-circle nav-icon"></i>
-                  <p>{{course}}</p>
+                  <p>{{(course)}}</p>
                 </a>
               </li>
             </ul>

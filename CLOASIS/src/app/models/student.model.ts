@@ -1,9 +1,22 @@
 export class Student {
 
-    id: number;
-    name: string;
     studentid: string;
+    teaM_ID: string;
+    name: string;
     email: string;
-    imagePath: string;
-    static lastid: number = 12;
+    phone: string;
+    dob: string;
+    gender: string;
+
+    constructor( studentid: string,teaM_ID: string,name: string,email: string,phone: string,dob: string,gender: string){
+
+        studentid = studentid;
+        teaM_ID= teaM_ID;
+        name = name;
+        email = email;
+        phone = phone;
+        dob = dob;
+        gender = gender;
+
+    }
 }

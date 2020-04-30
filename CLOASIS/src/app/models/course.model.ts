@@ -4,5 +4,11 @@ export class Course {
     coursecode: string;
     room: string;
     professor: string;
-    progress: string;
+    profEmail: string;
+    profOffice: string;
+    description: string;
+    credits: number;
+    progress: number;
+    sectionNum: number;
+    semester: string;
 }

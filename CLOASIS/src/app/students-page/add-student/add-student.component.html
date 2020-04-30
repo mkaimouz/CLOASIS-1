@@ -1,0 +1,39 @@
+<div class="card w-100" style="background-color: #1C2228; padding: 15px"> 
+    <h5 class="card-header info-color white-text text-center py-4">
+      <strong>Add Student</strong>
+    </h5>
+    <form class="center" [formGroup]="EditForm" (ngSubmit)="onSubmit()">
+        <div class="md-form">
+      <label > ID </label>
+      <input mdbInput type="text" id="crn" class="form-control" formControlName="ID" >
+    </div>
+    <div class="md-form">
+      <label > Name </label>
+     <input mdbInput type="text" class="form-control" id="Name" formControlName="Name"> 
+    </div>
+    <div class="md-form">
+      <label >Email</label>
+      <input mdbInput type="text"  class="form-control" formControlName="Email" >
+      </div>
+      <div class="md-form">
+      <label > Phone </label>
+      <input mdbInput type="text" class="form-control" formControlName="Phone" >
+      </div>
+      <div class="md-form">
+      <label > Gender </label>
+      <input mdbInput type="text" class="form-control" formControlName="Gender">
+      </div>
+      <div class="md-form">
+        <input mdbInput type="date" id="input" class="form-control" mdbInput formControlName="DOB">
+        <label > Date of Birth </label>
+      </div>
+      <div style="padding-top: 20px;">
+        <button mdbBtn class="btn btn-success"  rounded="true" size="md" type="submit"> Add </button>
+        <button (click)="onCancel()" type="button" mdbBtn color="danger" rounded="true" size="md" class="my-0" >Cancel</button>
+    </div>
+      
+  </form>
+       
+        
+  
+    </div>

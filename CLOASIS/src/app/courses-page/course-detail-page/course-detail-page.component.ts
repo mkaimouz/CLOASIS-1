@@ -1,7 +1,6 @@
 import { Component, OnInit} from '@angular/core';
 import { Course } from 'src/app/models/course.model';
 import { ActivatedRoute, Data } from '@angular/router';
-import { Student } from 'src/app/models/student.model';
 import { CourseService } from 'src/app/services/course.service';
 import { RoutingExtrasService } from 'src/app/services/routing-extras.service';
 
@@ -17,6 +16,7 @@ export class CourseDetailPageComponent implements OnInit{
   }
 
   course: Course;
+  courseName: string;
   page: string = "Students";
 
   constructor(private route: ActivatedRoute,private courseService: CourseService,private routingExtras: RoutingExtrasService) { }
@@ -28,6 +28,10 @@ export class CourseDetailPageComponent implements OnInit{
           this.course = data['course'];
         }
       );
+    this.courseService.selectedCourse.subscribe(crs => {
+      this.course = crs;
+      this.courseName = this.course.name;
+    });
     this.routingExtras.coursePage
       .subscribe(
         (page: string) => {

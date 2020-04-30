@@ -23,6 +23,10 @@ import { TeamManagerPageComponent } from './courses-page/course-detail-page/team
 import { ExamsPageComponent } from './courses-page/course-detail-page/exams-page/exams-page.component';
 import { AssignmentsPageComponent } from './courses-page/course-detail-page/assignments-page/assignments-page.component';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
+import { StudentTableComponent } from './students-page/student-table/student-table.component';
+import { EditStudentTableComponent } from './students-page/student-table/edit-student-table/edit-student-table.component';
+import {HttpClientModule} from '@angular/common/http';
+import { AddStudentComponent } from './students-page/add-student/add-student.component'
 
 
 @NgModule({
@@ -41,7 +45,10 @@ import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
     CourseCLOPageComponent,
     TeamManagerPageComponent,
     ExamsPageComponent,
-    AssignmentsPageComponent
+    AssignmentsPageComponent,
+    StudentTableComponent,
+    EditStudentTableComponent,
+    AddStudentComponent
   ],
   imports: [
     BrowserModule,
@@ -50,6 +57,7 @@ import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
     ReactiveFormsModule,
     ChartsModule,
     NgbModule,
+    HttpClientModule,
     MDBBootstrapModule.forRoot()
   ],
   providers: [CourseService,CourseResolverService],

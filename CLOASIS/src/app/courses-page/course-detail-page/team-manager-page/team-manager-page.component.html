@@ -1,17 +1,17 @@
 <div style="min-height: 529px; padding: 15px">
-    <div class="card" style="min-height: 400px; width: 800px; color:black;" *ngFor="let team of teams">
-        <div class="card-header">
-          <h3 class="card-title">{{team.title}}</h3>
+    <div class="card" style="min-height: 400px; width: 800px; color:black;" *ngFor="let team of teams" >
+        <div class="card-header" >
+          <h3 class="card-title">{{team.teaM_NAME}}</h3>
         </div>
         <div class="card-body">
             <table cellpadding="10px" style="height:350px">
                 <tr>
                     <td style="border-color:grey ;border-left-width: 0px; border-style: solid; border-right-width: 2px;border-top-width: 0px;border-bottom-width: 0px;">
                         <h6 style="font-weight: bold;">Description</h6>
-                        <p>{{team.description}}</p>
+                        <p></p>
                         <hr>
                         <h6 style="font-weight: bold;"> Progress </h6>
-                        <p><ngb-progressbar type="success" [value]="team.progress" [showValue]="true"></ngb-progressbar></p>
+                        <p><ngb-progressbar type="success" [value]="50" [showValue]="true"></ngb-progressbar></p>
                     </td>
                     <td style="width:550px">
                         <table style="color:black;" cellspacing="5px" cellpadding="5px">
@@ -21,9 +21,7 @@
                                 <th style="width: 50%" >Name </th>
                                 
                             </thead>
-                            <tr *ngFor="let member of team.members" class="make-hover">
-                                <td style="width: 25%">{{member.imagepath}}</td><td style="width: 25%">{{member.studentId}}</td><td style="width: 50%">{{member.name}}</td>
-                            </tr>
+                            
                         </table>
                     </td>
                 </tr>

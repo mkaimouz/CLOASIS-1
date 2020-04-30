@@ -1,7 +1,9 @@
 export class Registration {
 
-    id: number;
-    studentid: string;
     crn: string;
-    static lastid: number = 21;
+    courseName: string;
+    coursecode: string;
+    sectionNum: number;
+    studentid: string;
+    name:string;
 }

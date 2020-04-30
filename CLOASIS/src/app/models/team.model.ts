@@ -1,11 +1,16 @@
-import { TeamMember } from './teamMember.model';
 
 export class Team {
-    static lastTeamId:number = 2;
-    teamId:number
-    members: TeamMember[];
+    teaM_ID:number;
     crn:string;
-    title:string;
-    description:string;
-    progress:number;
+    teaM_NAME:string;
+    creatioN_DATE: string;
+
+    constructor(teaM_ID:number,crn:string,teaM_NAME:string,creatioN_DATE: string){
+
+        teaM_ID = teaM_ID;
+        crn = crn;
+        teaM_NAME = teaM_NAME;
+        creatioN_DATE = creatioN_DATE;
+
+    }
 }

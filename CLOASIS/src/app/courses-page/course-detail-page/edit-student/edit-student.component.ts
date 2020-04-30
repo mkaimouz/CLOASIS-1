@@ -18,7 +18,8 @@ export class EditStudentComponent implements OnInit {
 
   onSubmit(){
     if(this.addForm.valid){
-      this.courseService.editStudent(this.student.id,{id:this.student.id,name: this.addForm.get('name').value,studentid: this.addForm.get('id').value,email: this.addForm.get('email').value,imagePath: ""});
+      this.courseService.editStudent(this.student.studentid,{studentid:this.student.studentid,name: this.addForm.get('name').value,email: this.addForm.get('email').value,teaM_ID: this.student.teaM_ID,
+        phone:this.addForm.get('phone').value,dob:this.addForm.get('dob').value,gender:this.addForm.get('gender').value});
       this.router.navigate(['/COURSEDETAILPAGE/' + this.course.coursecode]);
     }
   }
@@ -32,7 +33,10 @@ export class EditStudentComponent implements OnInit {
       this.addForm = new FormGroup({
         'name' : new FormControl(this.student.name,[Validators.required]),
         'id' : new FormControl(this.student.studentid,[Validators.required]),
-        'email' : new FormControl(this.student.email,[Validators.required,Validators.email])
+        'email' : new FormControl(this.student.email,[Validators.required,Validators.email]),
+        'phone' : new FormControl(this.student.phone,[Validators.required]),
+        'dob' : new FormControl(this.student.dob,[Validators.required]),
+        'gender' : new FormControl(this.student.gender,[Validators.required]),
       });
   }
 
