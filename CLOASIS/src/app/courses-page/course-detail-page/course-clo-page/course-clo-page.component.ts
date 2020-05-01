@@ -12,7 +12,6 @@ clos: CLO[];
   constructor(private reportservice: ReportService,private courseservie: CourseService) { }
 
   ngOnInit(): void {
-    this.clos=this.reportservice.get_clos(this.courseservie.currentCourse.crn);
   }
 
 }
