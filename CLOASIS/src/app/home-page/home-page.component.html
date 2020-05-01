@@ -5,12 +5,11 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1 class="m-0">Dashboard v3</h1>
+            <h1 class="m-0">Home Page</h1>
           </div><!-- /.col -->
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
-              <li class="breadcrumb-item"><a href="#">Home</a></li>
-              <li class="breadcrumb-item active">Dashboard v3</li>
+              <li class="breadcrumb-item active">Home Page</li>
             </ol>
           </div><!-- /.col -->
         </div><!-- /.row -->
@@ -59,24 +58,43 @@
                 </div>
                 <div class="card-body card-body-theme">
                     <div>
-                            <div class="form-group">
-                                <span class = "pull-left">
-                                    <button class="btn btn-success" type="button">
+                            <div class="form-group" [formGroup]="EmailForm">
+                              <div class="row">
+                                <div class="col pull-left">
+                                  <span class = "pull-left">
+                                    <button class="btn btn-success" type="button" (click)="onSend()">
                                         Send
                                       </button>
                                 </span>
-                                <span class="pull-right">
+                                </div>
+                                <div class="col pull-right">
+                                  <span class="pull-right">
                                     <div class="dropdown" style="padding-bottom: 15px;">
                                         <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                          Receiving Class
+                                          <span *ngIf="selected">
+                                            {{selectedCourse}}
+                                          </span>
+                                          <span *ngIf="!selected">
+                                            Receiving Class
+                                          </span>
                                         </button>
                                         <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                            <a *ngFor="let course of coursecodes;" class="dropdown-item">{{course}}</a>
+                                            <a *ngFor="let course of coursecodes;" class="dropdown-item" (click)="onSelect(course)">{{course}}</a>
                                         </div>
                                       </div>
                                 </span>
-                                <textarea class="form-control" style="background-color: transparent; color: white; height: 250px;"></textarea>
+                                </div>
+                              
                               </div>
+                              <div class="row">
+                                <div class="md-form col-md-6">
+                                  <label style="margin-left: 20px;"> Subject </label>
+                                  <input mdbInput type="text" class="form-control" formControlName="subject" style="color: white;">
+                                </div>
+                                  <textarea class="form-control" class="form-control" formControlName="body" style="background-color: transparent; color: white; height: 250px;"></textarea>
+                              </div>
+                            </div>
+                                
                     </div>
 
                 </div>

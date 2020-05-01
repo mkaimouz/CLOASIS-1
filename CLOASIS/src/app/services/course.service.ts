@@ -130,6 +130,10 @@ export class CourseService {
     this.http.post<Student>('https://cloasisapi.azurewebsites.net/Student/CreateStudent',{"studentid":studentid,"teaM_ID":teamID,"name":name,"email":email,"phone":phone,"dob":dob,"gender":gender},httpOptions).subscribe();
   }
 
+  sendEmail(from:string,to:string,subject:string,body:string){
+    this.http.post<Student>('https://cloasisapi.azurewebsites.net/Email/SendEmail',{"from":from,"to":to,"subject":subject,"body":body},httpOptions).subscribe();
+  }
+
 
 
   removeStudent(id: string,a :string[]=[], b: number = 0){

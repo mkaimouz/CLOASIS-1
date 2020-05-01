@@ -3,6 +3,7 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Student } from 'src/app/models/student.model';
 import { CourseService } from 'src/app/services/course.service';
 import { Router } from '@angular/router';
+import { stringify } from 'querystring';
 
 @Component({
   selector: 'app-add-student',
@@ -14,6 +15,7 @@ export class AddStudentComponent implements OnInit {
   EditForm: FormGroup;
   studentID: string="";
   student: Student;
+  gen:string;
   constructor(private courseService: CourseService,private router: Router) { }
 
   ngOnInit(): void {
@@ -30,7 +32,19 @@ export class AddStudentComponent implements OnInit {
   }
   onSubmit(){
     if(this.EditForm.valid){
-      this.courseService.addStudent("",this.EditForm.get('ID').value,null,this.EditForm.get('Name').value,this.EditForm.get('Email').value,this.EditForm.get('Phone').value,this.EditForm.get('DOB').value,this.EditForm.get('Gender').value);
+      this.gen = this.EditForm.get('Gender').value
+
+      if (this.gen === 'Male'){
+        this.gen = 'M';
+      }
+      else if (this.gen === 'Female'){
+        this.gen = 'F';
+      }
+      else if (this.gen === 'Rather Not To Say'){
+        this.gen = 'O';
+      }
+
+      this.courseService.addStudent("",this.EditForm.get('ID').value,null,this.EditForm.get('Name').value,this.EditForm.get('Email').value,this.EditForm.get('Phone').value,this.EditForm.get('DOB').value,this.gen);
       this.router.navigate(['/STUDENTSPAGE' ]);
     }
     }
