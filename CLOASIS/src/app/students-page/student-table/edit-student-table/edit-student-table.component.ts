@@ -19,10 +19,10 @@ export class EditStudentTableComponent implements OnInit {
     this.studentID=this.courseService.editStudent_ID;
     this.student=this.courseService.getStudent(this.studentID);
     this.EditForm=new FormGroup({
-      'ID': new FormControl(this.student.studentid,[Validators.required]) ,
-      'Name': new FormControl(this.student.name,[Validators.required]) ,
+      'ID': new FormControl(this.student.studentid,[Validators.required,Validators.pattern('[0-9]{9,9}$')]) ,
+      'Name': new FormControl(this.student.name,[Validators.required,Validators.pattern('[A-Z][a-z]+[ ][A-Z][a-z]+')]) ,
       'Email': new FormControl(this.student.email,[Validators.required,Validators.email]) ,
-      'Phone': new FormControl(this.student.phone,[Validators.required]) ,
+      'Phone': new FormControl(this.student.phone,[Validators.required,Validators.pattern('[+][0-9]+')]) ,
       'Gender':new FormControl(this.student.gender,[Validators.required]) ,
       'TeamID': new FormControl(this.student.teaM_ID,[Validators.required]) ,
       'DOB': new FormControl(this.student.dob,[Validators.required]) 

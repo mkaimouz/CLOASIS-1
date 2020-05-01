@@ -1,2 +1,23 @@
-<div style="height: 529px"><p>course-clo-page works!</p></div>
+<div  style=" min-height:529px;">
+    <div *ngFor="let clo of clos; let id = index" class="card">
+    <h5 class="card-header">{{clo.description}}</h5>
+    <div class="card-body">
+        <table class="table text-center" style="color:black;">
+            <tr>
+                <th class="text-center">ID:</th>
+                <th class="text-center">Report ID:</th>
+            </tr>
+            <tr>
+                <td class="text-center"><span>{{clo.clo_id}}</span></td>
+                <td class="text-center"><span>{{clo.report_id}}</span></td>
+    
+              </tr>
+        </table>
+        <!--
+        <button  class="btn btn-info" size="md" rounded="true" type="button" mdbBtn >View Details</button>
+        -->
+    </div>
+  </div>
+</div>
+
 

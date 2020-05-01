@@ -6,22 +6,37 @@
         <div class="md-form">
       <label > ID </label>
       <input mdbInput type="text" id="crn" class="form-control" formControlName="ID" >
+      <span 
+      *ngIf="!EditForm.get('ID').valid && EditForm.get('ID').touched"
+      class="help-block">Please enter a valid student ID</span>
     </div>
     <div class="md-form">
       <label > Name </label>
-     <input mdbInput type="text" class="form-control" id="Name" formControlName="Name"> 
+     <input mdbInput type="text" class="form-control" id="Name" formControlName="Name">
+     <span 
+      *ngIf="!EditForm.get('Name').valid && EditForm.get('Name').touched"
+      class="help-block">Please enter a valid Name</span> 
     </div>
     <div class="md-form">
       <label >Email</label>
       <input mdbInput type="text"  class="form-control" formControlName="Email" >
+      <span 
+      *ngIf="!EditForm.get('Email').valid && EditForm.get('Email').touched"
+      class="help-block">Please enter a valid student Email</span>
       </div>
       <div class="md-form">
       <label > Phone </label>
       <input mdbInput type="text" class="form-control" formControlName="Phone" >
+      <span 
+      *ngIf="!EditForm.get('Phone').valid && EditForm.get('Phone').touched"
+      class="help-block">Please enter a valid Phone Number</span>
       </div>
       <div class="md-form">
       <label > Gender </label>
       <input mdbInput type="text" class="form-control" formControlName="Gender">
+      <span 
+        *ngIf="!EditForm.get('DOB').valid && EditForm.get('DOB').touched"
+        class="help-block">Please select a Date of Birth</span>
       </div>
       <div class="md-form">
       <label > Team ID </label>

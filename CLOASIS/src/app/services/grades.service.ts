@@ -57,7 +57,7 @@ export class GradesService {
   ];
 
   getStudentGradesInClass(id:string,crn:string,b:number = 0){
-    this.http.get('https://cloasisapi.azurewebsites.net/Grade/GetGradesOfStudentInClass/'+id+'/'+crn).subscribe( grd => {   
+    this.http.get('https://cloasisapi.azurewebsites.net/Grade/GetGradesOfStudentInClass/'+id+'/'+crn,httpOptions).subscribe( grd => {   
       for(let key in grd){
         b++;
       }
@@ -121,7 +121,7 @@ export class GradesService {
   }
 
   getGeneralAverage(crn: string,a:number=0){
-    this.http.get('https://cloasisapi.azurewebsites.net/Grade/GetGradesStatsOfClass/'+crn).subscribe( grds => {
+    this.http.get('https://cloasisapi.azurewebsites.net/Grade/GetGradesStatsOfClass/'+crn,httpOptions).subscribe( grds => {
       for(let k in grds){
         a = a + grds[k]["Average"];
       }
@@ -130,7 +130,7 @@ export class GradesService {
   }
 
   getStandardDev(crn:string,a:number = 0 ){
-    this.http.get('https://cloasisapi.azurewebsites.net/Grade/GetGradesStatsOfClass/'+crn).subscribe( grds => {
+    this.http.get('https://cloasisapi.azurewebsites.net/Grade/GetGradesStatsOfClass/'+crn,httpOptions).subscribe( grds => {
       for(let k in grds){
         a = a + grds[k]["Standard_Deviation"];
       }

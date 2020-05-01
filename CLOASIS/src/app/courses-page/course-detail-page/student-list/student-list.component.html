@@ -4,8 +4,9 @@
         <td width="30%" valign="top" >
             <table class="table" >
                 <thead>
-                    <th style="width: 40%">Student ID</th>
-                    <th style="width: 60%" >Name <a routerLink="AddStudent" style="float:right; border-radius: 0px; padding: 0px; color:blue; background-color: transparent; border:0px; " >Add Student</a></th>
+                    <th >Student ID</th>
+                    <th  >Name</th>
+                    <th style="width: 20%;"><a routerLink="AddStudent" style="float:right; border-radius: 0px; padding: 0px;   border:0px; " ><button type="button" mdbBtn class="btn btn-success"   size="sm"  rounded="true" >Add Student</button></a></th>
                     
                 </thead>
                 <tbody style="height: 100%;">
@@ -20,8 +21,11 @@
             <div style="height:100%; padding: 20px; background-color: transparent; color:white;">
                 <div style="text-align: center;">
                     <div class="btn-group" role="group" *ngIf="selectedStudent.name !== 'Please select a Student'" >
-                        <button type="button" class="btn btn-primary" routerLink="EditStudent">Edit</button>
-                        <button type="button" class="btn btn-danger" (click)="delete(selectedStudent.studentid)">Delete</button>
+                        <div>
+                       <button type="button" mdbBtn class="btn btn-info"   size="md"  rounded="true" routerLink="EditStudent">Edit</button> </div>
+                       <div>
+                        <button type="button" mdbBtn class="btn btn-danger"  size="md"  rounded="true" (click)="delete(selectedStudent.studentid)">Delete</button>
+                    </div>
                     </div>
                     <hr *ngIf="selectedStudent.name !== 'Please select a Student'" color="white">
                     <h1 >{{selectedStudent.name}}</h1>
