@@ -50,7 +50,7 @@ import { ExamDetailPageComponent } from './courses-page/course-detail-page/exams
     StudentTableComponent,
     EditStudentTableComponent,
     AddStudentComponent,
-    ExamDetailPageComponent
+    ExamDetailPageComponent,
   ],
   imports: [
     BrowserModule,

@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Course } from '../models/course.model';
+import { CourseService } from '../services/course.service';
 
 @Component({
   selector: 'app-home-page',
@@ -7,9 +9,20 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HomePageComponent implements OnInit {
 
-  constructor() { }
+  courses: any;
+  coursecodes = [];
 
-  ngOnInit(): void {
+  constructor(private courseService: CourseService) { }
+
+  ngOnInit(){
+    this.courseService.getALLCourses().subscribe(
+      courses => {
+        this.courses = courses;
+        this.courses.forEach( course => {
+          this.coursecodes.push(course["Course's Code"]);
+        });
+      }
+    );
   }
 
 }

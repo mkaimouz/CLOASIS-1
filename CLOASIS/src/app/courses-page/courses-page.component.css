@@ -1,8 +1,0 @@
-
-.table-hover tbody tr:hover td
-    {
-  background-color: Lavender;
-}     
-.table-row:hover{background:Lavender;}
-
-.table{table-layout:fixed}
