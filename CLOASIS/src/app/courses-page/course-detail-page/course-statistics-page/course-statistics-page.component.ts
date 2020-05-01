@@ -52,9 +52,18 @@ export class CourseStatisticsPageComponent implements OnInit {
   ngOnInit(): void {
 
     this.course = this.courseService.currentCourse;
-    this.generalAverage = +this.gradesService.getGeneralAverage(this.course.crn).toPrecision(5);
-    this.numberOfStudents = this.courseService.getNoOfStudents(this.course.crn);
-    this.standDev = +this.gradesService.getStandardDev(this.course.crn).toPrecision(5);
+    this.gradesService.getGeneralAverage(this.course.crn);
+    this.gradesService.generalAverageEmitter.subscribe( gg => {
+      this.generalAverage = +gg;
+    })
+    this.gradesService.getNoOfStudents(this.course.crn);
+    this.gradesService.NoOfStudentsEmitter.subscribe( gg => {
+      this.numberOfStudents = gg;
+    });
+    this.gradesService.getStandardDev(this.course.crn);
+    this.gradesService.StandardDeviationEmitter.subscribe( grds => {
+      this.standDev = +grds;
+    });
     this.top = this.gradesService.getTopStudent(this.course.crn);
     this.topStudent = this.top[0];
     this.topAvg = this.top[1];

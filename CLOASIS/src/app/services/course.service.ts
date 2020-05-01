@@ -157,11 +157,7 @@ export class CourseService {
   }
 
   editCourse(crn: string, course: Course){
-    this.courses.forEach((crs,i:number)=>{
-      if(crs.crn===crn){
-        this.courses[i]=course;
-      }
-    });
+    //this.http.put()
   }
 
   getUnregStudents(cr:string,a:Student[]=[]){

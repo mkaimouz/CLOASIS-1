@@ -6,8 +6,15 @@ import { Grades } from '../models/grades.model';
 import { CGD } from '../models/courseGradeDistribution.model';
 import { Subject } from 'rxjs';
 import { CourseService } from './course.service';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { StudentGrade } from '../models/student-grade.model';
+
+const httpOptions = {
+  headers: new HttpHeaders({
+    'Content-Type' : 'application/json',
+    'Accept' : 'q=0.8;application/json;q=0.9'
+  })
+};
 
 @Injectable({
   providedIn: 'root'
@@ -17,6 +24,9 @@ export class GradesService {
   selectedStudentGradesEmmitter = new Subject<number[]>();
   cgdEmitter = new Subject<CGD[]>();
   ExamType: String;
+  generalAverageEmitter = new Subject<string>();
+  StandardDeviationEmitter = new Subject<string>();
+  NoOfStudentsEmitter = new Subject<number>();
 
   grades: Grades[] = [
     {id: 1,studentId: "201904057",crn: "202020",assignment1:80,assignment2:90,midterm:70,final:85},
@@ -60,35 +70,9 @@ export class GradesService {
     });
   }
 
-  student_grades: StudentGrade[]=[
-    {grade_id:"1",student_id:"202003295",grade:100,description:"Final Exam"},
-    {grade_id:"1",student_id:"201807968",grade:100,description:"Final Exam"},
-    {grade_id:"1",student_id:"201902208",grade:100,description:"Final Exam"},
-    {grade_id:"1",student_id:"201805656",grade:100,description:"Final Exam"},
-    {grade_id:"1",student_id:"201602291",grade:100,description:"Final Exam"},
-    {grade_id:"1",student_id:"201902619",grade:100,description:"Final Exam"},
-    {grade_id:"1",student_id:"202003884",grade:100,description:"Final Exam"},
-    {grade_id:"1",student_id:"201607194",grade:100,description:"Final Exam"},
-    {grade_id:"1",student_id:"202003295",grade:50,description:"Midterm Exam"},
-    {grade_id:"1",student_id:"201807968",grade:50,description:"Midterm Exam"},
-    {grade_id:"1",student_id:"201902208",grade:50,description:"Midterm Exam"},
-    {grade_id:"1",student_id:"201805656",grade:50,description:"Midterm Exam"},
-    {grade_id:"1",student_id:"201602291",grade:50,description:"Midterm Exam"},
-    {grade_id:"1",student_id:"201902619",grade:50,description:"Midterm Exam"},
-    {grade_id:"1",student_id:"202003884",grade:50,description:"Midterm Exam"},
-    {grade_id:"1",student_id:"201607194",grade:50,description:"Midterm Exam"}
-  ];
+  
 
-  get_student_grades(){
-    var grades: StudentGrade[]=[];
-    this.student_grades.forEach((grade,i:number)=>{
-      if (grade.description===this.ExamType){
-        grades.push(grade);
-      }
-    })
-
-    return grades
-  }
+  
 
   selectChartGrades(id:string,crn:string,g: number[] = []){
     this.grades.forEach( grade => {
@@ -127,23 +111,31 @@ export class GradesService {
     return x/cgd.overall ;
   }
 
-  getGeneralAverage(crn: string, x:number = 0 , counter:number = 0,cgd:CGD = this.getCGD(crn)){
-    this.courseService.registrations.forEach(reg => {
-      if(reg.crn === crn){
-        counter++;
-        x = x + this.getAverage(this.getGrades(crn,reg.studentid),cgd);
+  getNoOfStudents(crn:string,b:number = 0){
+    this.http.get('https://cloasisapi.azurewebsites.net/Registration/GetStudentsInClass/'+crn,httpOptions).subscribe( stds => {
+      for(let k in stds){
+        b++;
       }
+      this.NoOfStudentsEmitter.next(b);
     });
-    return x/counter;
   }
 
-  getStandardDev(crn:string,avg:number = this.getGeneralAverage(crn),x:number = 0,cgd:CGD = this.getCGD(crn) ){
-    this.courseService.registrations.forEach(reg => {
-      if(reg.crn === crn){
-        x = x + Math.pow(this.getAverage(this.getGrades(crn,reg.studentid),cgd) - avg,2)
+  getGeneralAverage(crn: string,a:number=0){
+    this.http.get('https://cloasisapi.azurewebsites.net/Grade/GetGradesStatsOfClass/'+crn).subscribe( grds => {
+      for(let k in grds){
+        a = a + grds[k]["Average"];
       }
+      this.generalAverageEmitter.next((a/4).toPrecision(5));
     });
-    return Math.sqrt(x/this.courseService.getNoOfStudents(crn));
+  }
+
+  getStandardDev(crn:string,a:number = 0 ){
+    this.http.get('https://cloasisapi.azurewebsites.net/Grade/GetGradesStatsOfClass/'+crn).subscribe( grds => {
+      for(let k in grds){
+        a = a + grds[k]["Standard_Deviation"];
+      }
+      this.StandardDeviationEmitter.next((a/4).toPrecision(5));
+    });
   }
 
   getTopStudent(crn:string,top:Student = {studentid: "",name: "",email:"",teaM_ID: "",phone:"",dob:"",gender:""},topAvg:number = 0,cgd:CGD = this.getCGD(crn),a:number = 0){

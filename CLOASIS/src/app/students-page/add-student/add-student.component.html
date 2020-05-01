@@ -20,8 +20,12 @@
       <input mdbInput type="text" class="form-control" formControlName="Phone" >
       </div>
       <div class="md-form">
-      <label > Gender </label>
-      <input mdbInput type="text" class="form-control" formControlName="Gender">
+        <select class="custom-select"  formControlName="Gender">
+          <option value="" disabled>Gender</option>
+          <option>M</option>
+          <option>F</option>
+          <option>O</option>
+       </select>
       </div>
       <div class="md-form">
         <input mdbInput type="date" id="input" class="form-control" mdbInput formControlName="DOB">

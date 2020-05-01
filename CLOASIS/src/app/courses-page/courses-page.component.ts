@@ -45,7 +45,7 @@ export class CoursesPageComponent implements OnInit {
   }
 
   onSave(crn:string){
-    this.courseService.editCourse(crn,{crn:this.crn.nativeElement.value,name:this.name.nativeElement.value,coursecode:this.coursecode.nativeElement.value,room:this.room.nativeElement.value,professor:this.professor.nativeElement.value,progress:50,profEmail:"",profOffice:"",description:"",credits:3,sectionNum:1,semester:""})
+    this.courseService.editCourse(crn,{crn:this.crn.nativeElement.value,name:this.name.nativeElement.value,coursecode:this.coursecode.nativeElement.value,room:this.room.nativeElement.value,professor:this.professor.nativeElement.value,progress:this.progress.nativeElement.value,profEmail:"",profOffice:"",description:"",credits:3,sectionNum:1,semester:""})
     this.disableEdit();
     this.courses=this.courseService.getCourses();
   }

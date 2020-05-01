@@ -11,6 +11,7 @@
                 -->
               <tr>
                 <th class="text-center">Student ID</th>
+                <th class="text-center">Name</th>
                 <th class="text-center">Grade</th>
                 <th class="text-center">Click To Edit</th>
               </tr>
@@ -18,6 +19,9 @@
                 <td >
                   <span >{{grade.student_id}}</span>
           
+                </td>
+                <td>
+                  <span> {{grade.name}} </span>
                 </td>
                 <td >
                     <span *ngIf="grade.student_id!==editgrade_id" >{{grade.grade}}</span>

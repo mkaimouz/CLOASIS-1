@@ -18,11 +18,14 @@ export class ExamsPageComponent implements OnInit {
 
   ngOnInit(): void {
     this.course=this.courseservie.currentCourse;
-    this.exams=this.examservice.get_Exams(this.course.crn);
+    this.examservice.examsEmitter.subscribe( exs => {
+      this.exams = exs;
+    });
+    this.examservice.get_Exams(this.course.crn);
   }
 
   OnClick(exam: string){
-    this.gradeservive.ExamType=exam;
+    this.examservice.currentExam = exam;
   }
 
 

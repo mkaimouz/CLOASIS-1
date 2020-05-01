@@ -1,31 +1,13 @@
 <div style="min-height: 529px; padding: 15px">
-    <div class="card" style="min-height: 400px; width: 800px; color:black;" *ngFor="let team of teams" >
+    <div class="card" style="min-height: 300px; width: 800px; color:black;" *ngFor="let team of teams" >
         <div class="card-header" >
           <h3 class="card-title">{{team.teaM_NAME}}</h3>
         </div>
         <div class="card-body">
-            <table cellpadding="10px" style="height:350px">
-                <tr>
-                    <td style="border-color:grey ;border-left-width: 0px; border-style: solid; border-right-width: 2px;border-top-width: 0px;border-bottom-width: 0px;">
-                        <h6 style="font-weight: bold;">Description</h6>
-                        <p></p>
-                        <hr>
-                        <h6 style="font-weight: bold;"> Progress </h6>
-                        <p><ngb-progressbar type="success" [value]="50" [showValue]="true"></ngb-progressbar></p>
-                    </td>
-                    <td style="width:550px">
-                        <table style="color:black;" cellspacing="5px" cellpadding="5px">
-                            <thead>
-                                <th style="width: 25%">Image</th>
-                                <th style="width: 25%">Student ID</th>
-                                <th style="width: 50%" >Name </th>
-                                
-                            </thead>
-                            
-                        </table>
-                    </td>
-                </tr>
-            </table>
+            <p>Description : {{team.project_Desc}}</p>
+            <hr>
+            <p>Creation Date : {{team.creatioN_DATE}}</p>
+            <button (click)="delete(team.teaM_ID,team.projID)">Delete</button>
         </div>
     </div>
 </div>

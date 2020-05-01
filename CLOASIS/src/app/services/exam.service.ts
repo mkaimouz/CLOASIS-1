@@ -1,27 +1,58 @@
 import { Injectable } from '@angular/core';
 import { Exam } from '../models/exam.model';
+import { HttpClient } from '@angular/common/http';
+import { Subject } from 'rxjs';
+import { CourseService } from './course.service';
+import { StudentGrade } from '../models/student-grade.model';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ExamService {
 
-  constructor() { }
+  examsEmitter = new Subject<Exam[]>();
+  studentGradesEmitter = new Subject<StudentGrade[]>();
+  currentExam:string;
 
-  exams: Exam[]=[
-    {exam_id: 1,crn: "22041",duration: 2,room : "Bliss 205",start_time : "15:30:00",title : "Midterm Exam",date : "2020-01-01"},
-    {exam_id: 2,crn: "22041",duration: 2,room : "Bliss 205",start_time : "15:30:00",title : "Final Exam",date : "2020-01-01"}
-  ];
+  constructor(private http:HttpClient,private courseService:CourseService) { }
 
-  get_Exams(crn: string){
-    var course_exams: Exam[]=[];
-    this.exams.forEach((crs,i:number)=>{
-      if (crs.crn===crn){
-        course_exams.push(crs);
+  editExamGrade(grade:number,stdID:string){
+    this.http.get('https://cloasisapi.azurewebsites.net/Grade/GetGradesOfStudentInClass/'+stdID+'/'+this.courseService.currentCourse.crn).subscribe( grds => {
+      for(let gr in grds){
+        if(grds[gr]["GRADE_DESC"]===this.currentExam){
+          this.http.put('https://cloasisapi.azurewebsites.net/Grade/EditGrade/'+grds[gr]["GRADE_ID"],{"GRADE_ID":grds[gr]["GRADE_ID"],"REPORT_ID":grds[gr]["REPORT_ID"],"STUDENTID":grds[gr]["STUDENTID"],"NAME":grds[gr]["NAME"]
+            ,"GRADE":grade,"GRADE_DESC":grds[gr]["GRADE_DESC"],"COURSE_NAME":grds[gr]["COURSE_NAME"],"COURSE_CODE":grds[gr]["COURSE_CODE"],"SECTION_NUM":grds[gr]["SECTION_NUM"],"CRN":grds[gr]["CRN"]});
+          console.log(11);
+        }
       }
-    })
+    });
+    this.getGradesOfExam(this.courseService.currentCourse.crn,this.currentExam);
+  }
+  
 
-    return course_exams
+  get_Exams(crn: string,a:Exam[]=[]){
+    this.http.get('https://cloasisapi.azurewebsites.net/Lecture/GetExamsDetailsOfClass/'+crn).subscribe( exams => {
+      for(let ex in exams){
+        a.push({exam_id: exams[ex]["LECTURE_ID"],crn: exams[ex]["CRN"],
+          duration: exams[ex]["DURATION"],
+          room : exams[ex]["ROOM"],
+          start_time : exams[ex]["START_TIME"],
+          title : exams[ex]["DESCRIPTION"],
+          date : exams[ex]["LECTURE_DATE"]})
+      }
+      this.examsEmitter.next(a);
+    });
+  }
+
+  getGradesOfExam(crn:string,exam:string,a:StudentGrade[]=[]){
+    this.http.get('https://cloasisapi.azurewebsites.net/Grade/GetGradesOfClass/'+crn).subscribe(stds => {
+      for(let std in stds){
+        if(stds[std]["GRADE_DESC"]===exam){
+          a.push({grade_id:stds[std]["GRADE_ID"],student_id:stds[std]["STUDENTID"],name:stds[std]["NAME"],grade:stds[std]["GRADE"],description:stds[std]["GRADE_DESC"]});
+        }
+      }
+      this.studentGradesEmitter.next(a);
+    });
   }
 
 

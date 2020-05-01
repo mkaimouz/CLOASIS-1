@@ -1,16 +1,14 @@
 
 export class Team {
     teaM_ID:number;
-    crn:string;
     teaM_NAME:string;
     creatioN_DATE: string;
+    courseName: string;
+    courseCode: string;
+    sectionNum:string;
+    projID:number;
+    project_Title:string;
+    project_Desc:string;
 
-    constructor(teaM_ID:number,crn:string,teaM_NAME:string,creatioN_DATE: string){
-
-        teaM_ID = teaM_ID;
-        crn = crn;
-        teaM_NAME = teaM_NAME;
-        creatioN_DATE = creatioN_DATE;
-
-    }
+    
 }
