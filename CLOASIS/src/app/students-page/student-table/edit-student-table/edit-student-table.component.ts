@@ -22,9 +22,9 @@ export class EditStudentTableComponent implements OnInit {
       'ID': new FormControl(this.student.studentid,[Validators.required,Validators.pattern('[0-9]{9,9}$')]) ,
       'Name': new FormControl(this.student.name,[Validators.required,Validators.pattern('[A-Z][a-z]+[ ][A-Z][a-z]+')]) ,
       'Email': new FormControl(this.student.email,[Validators.required,Validators.email]) ,
-      'Phone': new FormControl(this.student.phone,[Validators.required,Validators.pattern('[+][0-9]+')]) ,
+      'Phone': new FormControl(this.student.phone,[Validators.required,Validators.pattern('[+][0-9]{1,3}[ ]*[0-9]*[ ]*[0-9]+')]) ,
       'Gender':new FormControl(this.student.gender,[Validators.required]) ,
-      'TeamID': new FormControl(this.student.teaM_ID,[Validators.required]) ,
+      'TeamID': new FormControl(this.student.teaM_ID) ,
       'DOB': new FormControl(this.student.dob,[Validators.required]) 
     })
   }

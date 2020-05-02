@@ -65,6 +65,14 @@ export class CourseService {
     return student;
   }
 
+  FetchStudentInClass(crn:string){
+    return this.http.get('https://cloasisapi.azurewebsites.net/Registration/GetStudentsInClass/'+crn)
+  }
+
+  FetchStudentById(id:string){
+    return this.http.get('https://cloasisapi.azurewebsites.net/Student/FetchStudent/'+id);
+  }
+
   getNoOfStudents(crn:string,counter:number = 0){
     this.registrations.forEach(reg => {
       if(reg.crn === crn){
@@ -75,10 +83,10 @@ export class CourseService {
   }
 
   getCourseStudents(CRN: string,a: Student[] = []){
-    this.http.get('https://cloasisapi.azurewebsites.net/Registration/GetStudentsInClass/'+ CRN,httpOptions).subscribe(
+    this.http.get('https://cloasisapi.azurewebsites.net/Registration/GetStudentsInClass/'+ CRN,httpOptions).toPromise().then(
       reg => {
         for(let key in reg) {
-          a.push({studentid:reg[key]["STUDENTID"] ,name:reg[key]["NAME"],email:"pky00@mail.aub.edu",teaM_ID: null,phone:"+961 71 000000",dob:"1999-01-01T00:00:00",gender:"M"});
+          a.push({studentid:reg[key]["STUDENTID"] ,name:reg[key]["NAME"],email:reg[key]["Email"],teaM_ID: null,phone:"+961 71 000000",dob:"1999-01-01T00:00:00",gender:"M"});
         }
         this.studentsEmitter.next(a);
       }
@@ -92,6 +100,10 @@ export class CourseService {
       //return course[0]["CRN"];
     //});
     return {crn:"N/A", name: "N/A", coursecode: "N/A", room: "N/A", professor: "N/A", progress: 50,profEmail:"",profOffice:"",description:"",credits:3,sectionNum:1,semester:""};
+  }
+
+  fetchClassesByCode(code: string){
+    return this.http.get('https://cloasisapi.azurewebsites.net/Class/FetchClass/' + code,httpOptions);
   }
 
   setCourse(courseCode:string, a: Course = {crn:"N/A", name: "N/A", coursecode: "N/A", room: "N/A", professor: "N/A", progress: 50,profEmail:"",profOffice:"",description:"",credits:3,sectionNum:1,semester:""}){
